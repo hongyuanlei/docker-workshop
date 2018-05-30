@@ -1,8 +1,33 @@
 # docker-workshop
+----------------
+
+### Workshop要实现的应用架构
+
+
+![system-structure](https://user-images.githubusercontent.com/7569085/40713285-2eec74ea-6432-11e8-817f-3b7f19a8eb21.png)
 
 ## Docker 简介
 
-## Docker子命令分类
+### Docker子命令分类
+
+| 子命令分类           | 子命令           |
+|:-------------      |:---------------:|
+| Docker环境信息      | info、version    |
+| 容器生命周期管理      | create、exec、kill、pause、restart、rm、run、start、stop、unpause        |
+| 镜像仓库命令         | login、logout、pull、push、search        |
+| 镜像管理            | build、images、import、load、rmi、save、tag、commit        |
+| 容器运维操作         | attach、export、inspect、port、ps、rename、stats、top、wait、up、cp、diff |
+| 系统日志信息         | events、history、logs        |
+
+### Docker 命令结构
+
+![docker-command-structure](https://user-images.githubusercontent.com/7569085/40713284-2eaf1c6c-6432-11e8-87a6-cc6cd5bb94db.png)
+
+
+### Docker Architecture
+![docker-archtecture](https://user-images.githubusercontent.com/7569085/40713282-2e66a20c-6432-11e8-823b-5433d2d21b5e.png)
+
+
 
 
 ## Set up docker environment
@@ -48,15 +73,15 @@ $ vagrant halt
 
 [Learn More >>](http://sourabhbajaj.com/mac-setup/Vagrant/README.html)
 
-### Install Docker
+## Install Docker
 
-#### Uninstall old versions
+### Uninstall old versions
 
 ```
 $ sudo apt-get remove docker docker-engine docker.io
 ```
 
-#### Supported storage drivers
+### Supported storage drivers
 
 ```
 $ sudo apt-get update
@@ -66,9 +91,9 @@ $ sudo apt-get install \
     linux-image-extra-virtual
 ```
 
-#### Install Docker CE
+### Install Docker CE
 
-##### Install using the repository
+#### Install using the repository
 
 ```
 $ sudo apt-get update
@@ -93,7 +118,7 @@ $ sudo add-apt-repository \
    stable"
 ```
 
-##### INSTALL DOCKER CE
+#### INSTALL DOCKER CE
 
 ```
 $ sudo apt-get update
@@ -107,7 +132,7 @@ $ sudo docker run hello-world
 
 [Learn More >>](https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce-1)
 
-##### Mapping host port to vm port
+#### Mapping host port to vm port
 
 ```
 $ vim Vagrantfile
@@ -115,7 +140,7 @@ $ vim Vagrantfile
 config.vm.network "forwarded_port", guest: 6301, host: 6301
 ```
 
-#### Pull docker images
+### Pull docker images
 
 Those images will be used in our workshop, because pull images will cost some time, so please pull those images before we start the workshop.
 
@@ -128,7 +153,7 @@ $ sudo docker pull redis
 $ sudo docker images
 ```
 
-#### 启动应用容器栈
+## 启动应用容器栈
 
 ```
 $ mkdir workspace && cd workspace
@@ -179,7 +204,7 @@ $ sudo docker run -it \
 
 
 
-##### Redis Master容器节点配置
+### Redis Master容器节点配置
 
 Downlaod redis.conf template, then copy to the volume dir：
 
@@ -210,7 +235,7 @@ $ cp /redis-config/redis.conf .
 $ redis-server redis.conf
 ```
 
-##### Redis Slave容器节点配置
+### Redis Slave容器节点配置
 
 Modify the config of redis slave
 
@@ -237,7 +262,7 @@ $ redis-server redis.conf
 
 The same way to finish the config of another rediss slave.
 
-##### Redis 容器节点测试
+### Redis 容器节点测试
 
 First, In redis master container, start redis cli:
 
@@ -257,7 +282,7 @@ $ redis-cli
 "hello-world"
 ```
 
-##### APP容器节点(Django)配置
+### APP容器节点(Django)配置
 
 Install python redis package
 
@@ -371,7 +396,7 @@ python manage.py runserver 0.0.0.0:8001
 
 The configuration of another APP `APP2` is same.
 
-##### HAProxy容器节点配置
+### HAProxy容器节点配置
 
 ```
 $ cd ~/workspace/haproxy

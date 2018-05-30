@@ -1,10 +1,4 @@
 # docker-workshop
-----------------
-
-### Workshop要实现的应用架构
-
-
-![system-structure](https://user-images.githubusercontent.com/7569085/40713285-2eec74ea-6432-11e8-817f-3b7f19a8eb21.png)
 
 ## Docker 简介
 
@@ -28,13 +22,11 @@
 ![docker-archtecture](https://user-images.githubusercontent.com/7569085/40713282-2e66a20c-6432-11e8-823b-5433d2d21b5e.png)
 
 
-
-
 ## Set up docker environment
 
 ### Install Vagrant
 
-```
+```Shell
 $ brew cask install virtualbox
 $ brew cask install vagrant
 $ brew cask install vagrant-manager
@@ -43,31 +35,31 @@ $ brew cask install vagrant-manager
 
 Add the Vagrant box you want to use.
 
-```
+```Shell
 $ vagrant box add ubuntu/trusty64
 ```
 
 Now create a test directory and cd into the test directory. Then we'll initialize the vagrant machine.
 
-```
+```Shell
 $ vagrant init ubuntu/trusty64
 ```
 
 Now lets start the machine using the following command.
 
-```
+```Shell
 $ vagrant up
 ```
 
 You can ssh into the machine now.
 
-```
+```Shell
 $ vagrant ssh
 ```
 
 Halt the vagrant machine now.
 
-```
+```Shell
 $ vagrant halt
 ```
 
@@ -77,13 +69,13 @@ $ vagrant halt
 
 ### Uninstall old versions
 
-```
+```Shell
 $ sudo apt-get remove docker docker-engine docker.io
 ```
 
 ### Supported storage drivers
 
-```
+```Shell
 $ sudo apt-get update
 
 $ sudo apt-get install \
@@ -95,7 +87,7 @@ $ sudo apt-get install \
 
 #### Install using the repository
 
-```
+```Shell
 $ sudo apt-get update
 
 # Install packages to allow apt to use a repository over HTTPS:
@@ -120,7 +112,7 @@ $ sudo add-apt-repository \
 
 #### INSTALL DOCKER CE
 
-```
+```Shell
 $ sudo apt-get update
 
 # Install the latest version of Docker CE:
@@ -134,17 +126,21 @@ $ sudo docker run hello-world
 
 #### Mapping host port to vm port
 
-```
+```Shell
 $ vim Vagrantfile
 
 config.vm.network "forwarded_port", guest: 6301, host: 6301
 ```
 
+### 要实现的应用架构
+
+![system-structure](https://user-images.githubusercontent.com/7569085/40713285-2eec74ea-6432-11e8-817f-3b7f19a8eb21.png)
+
 ### Pull docker images
 
 Those images will be used in our workshop, because pull images will cost some time, so please pull those images before we start the workshop.
 
-```
+```Shell
 $ sudo docker pull ubuntu
 $ sudo docker pull django
 $ sudo docker pull haproxy
@@ -153,7 +149,7 @@ $ sudo docker pull redis
 $ sudo docker images
 ```
 
-## 启动应用容器栈
+### 启动应用容器栈
 
 ```
 $ mkdir workspace && cd workspace
